@@ -110,6 +110,19 @@ Source : http://leanpub.com/get-your-hands-dirty-on-clean-architecture[Tom Hombe
 
 *Rappeler en quelques lignes les grands principes de l'architecture hexagonale.*
 
+L'architecture hexagonale repose sur 2 éléments : 
+- Le domaine qui est le noyau de l'architecture qui repose sur une logique métier. Il existe des entités, des objets contenant des informations métiers. Et des use case, des traitements reposant sur ma logique du métier
+- Des ports. Ils sont "input" ou "output". Ce sont des interface contenant les prototype des methodes afin de permettre aux objets extérieurs au domaine d'interagir avec le domaine. 
+      - Les ports input permettent de solliciter le domaine,  ce sont des points d'entrée
+      - Les ports output permettent au domaine d'utiliser des éléments d'infrastructure extérieurs.
+- Les adapters
+
+Cette architecture respecte plusieurs principes :
+- L'isolation, les aspects techniques sont isolé des aspects métiers (dans le domaine)
+- L'inversion de dépendance, les composants technique extérieurs ne dépendent pas directement des composants du domaines pour leurs traitements. Au lieu de ça, ce sont les composants du domaines qui hérite des interfaces (ports input) qui exposent les fonctions de ces derniers aux composants techniques extérieurs pour que celui-ci effectue ses traitements. De même les composants du domaines, quand il doivent utiliser des fonction de composants externes (envoyer des mail etc…) n'héritent pas directement de ces composants mais utilise une interface (ports output) qui exposent les fonctions de ces composants externes.
+
+
+
 Compléter ce code avec une fonctionnalité de création de `TodoItem`  persisté en base et appelé depuis un endpoint REST `POST /todos` qui :
 
 * prend un `TodoItem` au format JSON dans le body (voir exemple de contenu plus haut);
@@ -125,6 +138,10 @@ _Temps estimé : 20 mins_
 * Implémenter (en junit) des TU sur la règle de gestion qui consiste à afficher `[LATE!]` dans la description d'un item en retard de plus de 24h.
 
 *Quels types de tests devra-t-on écrire pour les adapteurs ?* 
+Ici notre adaptateur c'est le contrôleur qui crée les endpoints et déclare les traitements de ces derniers. Nous écrirons donc des tests d'intégration ou nous vérifions pour chaque endpoint, quand nous les appelons, si la sortie est celle attendue. Si oui alors le test est passé. 
+
+Les tests d'intégration visent à tester que tous les composants développés s'articulent correctement ensemble. Appeler un entrypoint et vérifier sa sortie va confirmer que tous les composants mis en œuvre pour cette entrypoint travaillent bien ensemble
+S’il vous reste du temps, écrivez quelques-uns de ces types de test.
 
 *S'il vous reste du temps, écrire quelques uns de ces types de test.*
 

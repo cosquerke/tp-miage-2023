@@ -5,7 +5,8 @@ WARNING: NE PAS OUBLIER DE MENTIONNER LES DEUX NOMS SI VOUS ETES EN BINOME!
 
 COSQUER Kévin - LE BERRE Thibault
 
-Commentaires éventuels des étudiants : #XXXXXX#
+Commentaires éventuels des étudiants : 
+Kévin COSQUER a été absent durant la dernière séance de TP. De ce fait, Thibault LE BERRE a terminé le TP en collaboration avec le groupe d'Arthur MADEC-PREVOST - Arnaud LARTIGUE. Nous avons restitué ensemble dans ce projet le travail effectué durant la seconde séance de TP. 
 
 ## Pré-requis 
 

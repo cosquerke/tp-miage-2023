@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Le controlleur Spring MVC qui expose les endpoints REST
- * 
+ *
  * @author bflorat
  *
  */
@@ -24,20 +25,21 @@ public class TodoListController {
 	private static final String LATE = "[LATE!]";
 	private TodoItemRepository todoItemRepository;
 
+	@Autowired
 	public TodoListController(TodoItemRepository todoItemRepository) {
 		super();
 		this.todoItemRepository = todoItemRepository;
 	}
-	
+
 	public TodoListController() {
-		super();		
+		super();
 	}
 
 	@PostMapping("/todos")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void createTodoItem(@RequestBody TodoItem todoItem) {
 		// Code à compléter
-		// ...
+		this.todoItemRepository.save(todoItem);
 	}
 
 	@GetMapping("/todos")
@@ -50,11 +52,11 @@ public class TodoListController {
 
 	/**
 	 * RG 1 : si l'item a plus de 24h, ajouter dans le contenu une note "[LATE!]"
-	 * 
+	 *
 	 * @return liste des items
 	 */
 	private String finalContent(TodoItem item) {
-		return (Instant.now().isAfter(item.getTime().plus(1, ChronoUnit.DAYS))) ? 
+		return (Instant.now().isAfter(item.getTime().plus(1, ChronoUnit.DAYS))) ?
 				LATE + item.getContent()
 				: item.getContent();
 	}
